@@ -1,0 +1,9 @@
+# Build output and local installs never belong in the repo.
+node_modules/
+*.tgz
+*.log
+.DS_Store
+Thumbs.db
+
+# Local sync helper writes into the profile, never here.
+.dsh-prompt-*-source/

@@ -5,6 +5,14 @@
   "type": "module",
   "main": "lib/index.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hzys7/dsh-prompt-expander.git"
+  },
+  "homepage": "https://github.com/hzys7/dsh-prompt-expander#readme",
+  "bugs": {
+    "url": "https://github.com/hzys7/dsh-prompt-expander/issues"
+  },
   "keywords": [
     "dsh",
     "dsh-plugin",
