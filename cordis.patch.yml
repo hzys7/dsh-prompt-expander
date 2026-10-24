@@ -1,0 +1,9 @@
+# dsh-prompt-expander bundle patch: inserts the host row into the profile.
+#
+# The host half owns two HTTP routes (POST /prompt-expander/enhance and
+# /prompt-expander/diag). The browser half adds the button to the composer's
+# `conversation.input.right` list seat, which the shell renders immediately
+# before the model picker.
+- insert:
+    - id: prompt-expander
+      name: 'dsh-prompt-expander'

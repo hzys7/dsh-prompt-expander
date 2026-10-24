@@ -1,0 +1,22 @@
+# Submission entry for the awesome-dsh-plugin registry.
+#
+# Copy this file verbatim into the awesome-dsh-plugin repo as
+#   data/plugins/<owner>__dsh-prompt-expander.yml
+# and open a pull request. One file is the whole submission; the README list is
+# generated from these files after merge.
+#
+# Requirements this plugin already meets:
+#   - package.json declares dsh.bundle  -> installable via `dsh plugin add`
+#   - cordis.patch.yml sits at the repo root
+#   - real, working code (host route + client button), verified on dsh 0.2.1-rc.2
+# Still to do by the repo owner:
+#   - create the GitHub repo and push (must be at least 1 day old before the PR)
+#   - add the `dsh-plugin` topic to the repo
+#   - repo: https://github.com/hzys7/dsh-prompt-expander
+
+url: https://github.com/hzys7/dsh-prompt-expander
+name: hzys7/dsh-prompt-expander
+category: ui
+description:
+  en: Adds a button beside the composer that expands the current draft into a numbered specification, and restores the original on a second press.
+  zh: 在输入框旁加一个按钮，把当前草稿扩写成带编号要求的完整规格，再按一次恢复原文。

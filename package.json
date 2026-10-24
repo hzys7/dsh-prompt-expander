@@ -1,0 +1,44 @@
+{
+  "name": "dsh-prompt-expander",
+  "version": "0.1.0",
+  "description": "One-click prompt expansion for the DSH composer: turn a one-line draft into a full specification, press again to restore the original. 一键把草稿扩写成完整规格，再按恢复原文。",
+  "type": "module",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "prompt",
+    "expand",
+    "spec",
+    "composer"
+  ],
+  "engines": {
+    "node": ">=22.12.0",
+    "dsh": ">=0.2.0-rc.1 <0.3.0-0"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ],
+      "platform": "web"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.4"
+  }
+}
