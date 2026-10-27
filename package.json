@@ -1,8 +1,11 @@
 {
   "name": "dsh-prompt-expander",
-  "version": "0.1.0",
-  "description": "One-click prompt expansion for the DSH composer: turn a one-line draft into a full specification, press again to restore the original. 一键把草稿扩写成完整规格，再按恢复原文。",
+  "version": "0.1.1",
+  "description": "One-click prompt expansion for the DSH composer: turn a one-line draft into a full specification, press again to restore the original. 一键把草稿扩写成完整规格，发送后按钮自动复位，再点即可增强新草稿。",
   "type": "module",
+  "scripts": {
+    "test": "node test/client-reset.test.cjs"
+  },
   "main": "lib/index.js",
   "license": "MIT",
   "repository": {

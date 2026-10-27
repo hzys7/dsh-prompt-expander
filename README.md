@@ -1,4 +1,4 @@
-# dsh-prompt-boost
+# dsh-prompt-expander
 
 输入框旁的一键「增强提示词」按钮：点一下把一句草稿扩写成完整规格，再点一下还原原文。
 
@@ -11,6 +11,8 @@ rough draft into a complete specification, press again to restore the original.
 - 草稿涉及已有数据/文件/流程时，会自动补上「先检查再改、保住不能丢的、完成后验证、汇报改动」
 - 结果写回输入框，**原文保留在内存里**
 - 再点一次 → 恢复原文
+- 增强后的提示词**一发出（发送/排队），按钮立刻回到「待增强」**：下一篇草稿点一次就能增强，
+  不需要先点「恢复」
 - 增强后你手动改过文字 → 再点不会覆盖你的编辑，而是忘掉旧原文
 
 按钮位置在输入框右下角、**模型选择器左边**。状态一眼可辨：
@@ -28,7 +30,7 @@ rough draft into a complete specification, press again to restore the original.
 可在请求体里传 `mode` 指定：
 
 ```jsonc
-POST /prompt-boost/enhance
+POST /prompt-expander/enhance
 { "text": "你好", "mode": "standard" }   // mode 省略 = expand
 ```
 
@@ -41,10 +43,10 @@ POST /prompt-boost/enhance
 
 ```sh
 # web profile
-dsh plugin --profile web add dsh-prompt-boost
+dsh plugin --profile web add dsh-prompt-expander
 
 # 其他 profile 换成对应名字
-dsh plugin --profile <name> add dsh-prompt-boost
+dsh plugin --profile <name> add dsh-prompt-expander
 ```
 
 桌面版（DSH Desktop）请在应用内的 **设置 → 插件** 里安装，或用插件市场。
@@ -55,11 +57,18 @@ dsh plugin --profile <name> add dsh-prompt-boost
 
 两层结构，和 DSH 的插件约定一致：
 
-- **宿主半边** `lib/index.js`：注册一个 `POST /prompt-boost/enhance` 路由。收到草稿后调用
+- **宿主半边** `lib/index.js`：注册一个 `POST /prompt-expander/enhance` 路由。收到草稿后调用
   `ctx.llm.prepareCall(...)` 请求当前默认模型，把流式结果聚合返回。
 - **浏览器半边** `lib/client.js`：注册到 `conversation.input.right` 插槽（模型选择器左侧），
   通过 `conversation.input.for(actx)` 拿到输入框 shell，用 `draftSnapshot` 读、
   `setDraft` 写。
+
+### 按钮状态跟着草稿走
+
+输入框的 shell 会发布一份输入状态（`shell.state`，composer 就是从它渲染的）。插件订阅它，
+而不是只等按钮被点：一旦草稿不再是插件写进去的那份（发送会清空输入框，编辑会改写它），
+就丢掉原文记忆、按钮回到「待增强」。插件自己 `setDraft` 引发的同步发布不算数，否则刚增强
+完就会把原文记忆清掉。
 
 ### 推理内容不会混进结果
 
@@ -79,7 +88,7 @@ dsh plugin --profile <name> add dsh-prompt-boost
 ## 调试
 
 若按钮报「拿不到输入框」，插件会把运行时诊断写到
-`~/.dsh/prompt-boost-diag.log`（每次挂载/点击一行 JSON）。
+`~/.dsh/prompt-expander-diag.log`（每次挂载/点击/状态复位一行 JSON）。
 
 ## License
 
